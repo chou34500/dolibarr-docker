@@ -101,3 +101,9 @@ services:
         networks:
             - internal-pod
             - external-pod
+        labels:
+            - "traefik.enable=true"
+            - "traefik.http.routers.dolibarr.rule=Host(`dolibarr.web-evolution.io`)"
+            - "traefik.http.routers.dolibarr.entrypoints=https"
+            - "traefik.http.services.dolibarr.loadbalancer.server.port=80"
+            - "traefik.http.routers.dolibarr.tls.certresolver=letsencrypt"
