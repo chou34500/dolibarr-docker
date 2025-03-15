@@ -33,7 +33,7 @@ services:
         environment:
             MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root}
             #MYSQL_RANDOM_ROOT_PASSWORD: "1"
-            MYSQL_DATABASE: "dolidb"
+            MYSQL_DATABASE: dolibarr
             #MYSQL_USER_FILE: "/run/secrets/mysql-user"
             #MYSQL_PASSWORD_FILE: "/run/secrets/mysql-password"
             MYSQL_USER: dolibarr_user
@@ -53,11 +53,13 @@ services:
             WWW_USER_ID: 1000
             WWW_GROUP_ID: 1000
             DOLI_DB_HOST: mariadb
-            DOLI_DB_NAME: dolidb
+            DOLI_DB_NAME: dolibarr
+            DOLI_DB_USER: dolibarr_user
+            DOLI_DB_PASSWORD: dolibarr_password
             #DOLI_DB_USER_FILE: /run/secrets/mysql-user
             #DOLI_DB_PASSWORD_FILE: /run/secrets/mysql-password
-            DOLI_ADMIN_LOGIN: admintest
-            DOLI_ADMIN_PASSWORD: admintest
+            DOLI_ADMIN_LOGIN: admin
+            DOLI_ADMIN_PASSWORD: admin_password
             DOLI_URL_ROOT: http://0.0.0.0:81
             DOLI_INSTANCE_UNIQUE_ID: myinstanceuniqueid
             DOLI_CRON: 1
@@ -83,11 +85,13 @@ services:
             WWW_USER_ID: 1000
             WWW_GROUP_ID: 1000
             DOLI_DB_HOST: mariadb
-            DOLI_DB_NAME: dolidb
+            DOLI_DB_NAME: dolibarr
+            DOLI_DB_USER: dolibarr_user
+            DOLI_DB_PASSWORD: dolibarr_password
             #DOLI_DB_USER_FILE: "/run/secrets/mysql-user"
             #DOLI_DB_PASSWORD_FILE: "/run/secrets/mysql-password"
-            DOLI_ADMIN_LOGIN: "admintest"
-            DOLI_ADMIN_PASSWORD: "admintest"
+            DOLI_ADMIN_LOGIN: admin
+            DOLI_ADMIN_PASSWORD: admin_password
             DOLI_URL_ROOT: 'http://0.0.0.0:81'
             DOLI_INSTANCE_UNIQUE_ID: myinstanceuniqueid
             DOLI_INIT_DEMO: 1
