@@ -18,24 +18,26 @@ networks:
     external-pod:
         internal: false
 
-secrets:
-    mysql-user:
-        file: ./examples/with-secrets/secrets/mysql_user.secret
-    mysql-password:
-        file: ./examples/with-secrets/secrets/mysql_password.secret
+#secrets:
+    #mysql-user:
+        #file: ./examples/with-secrets/secrets/mysql_user.secret
+    #mysql-password:
+        #file: ./examples/with-secrets/secrets/mysql_password.secret
 
 services:
     mariadb:
-        image: mariadb:latest
-        secrets:
-            - mysql-user
-            - mysql-password
+        image: mariadb:10.6
+        #secrets:
+            #- mysql-user
+            #- mysql-password
         environment:
-            #MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root}
-            MYSQL_RANDOM_ROOT_PASSWORD: "1"
+            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root}
+            #MYSQL_RANDOM_ROOT_PASSWORD: "1"
             MYSQL_DATABASE: "dolidb"
-            MYSQL_USER_FILE: "/run/secrets/mysql-user"
-            MYSQL_PASSWORD_FILE: "/run/secrets/mysql-password"
+            #MYSQL_USER_FILE: "/run/secrets/mysql-user"
+            #MYSQL_PASSWORD_FILE: "/run/secrets/mysql-password"
+            MYSQL_USER: dolibarr_user
+            MYSQL_PASSWORD: dolibarr_password
         networks:
             - internal-pod
 
@@ -44,16 +46,16 @@ services:
             #context: ./docker-compose-links/${DOLI_VERSION}${PHP_VERSION}
         #image: dolibarr/dolibarr:${DOLI_VERSION}${PHP_VERSION}
         image: tuxgasy/dolibarr:18.0.2
-        secrets:
-            - mysql-user
-            - mysql-password
+        #secrets:
+            #- mysql-user
+            #- mysql-password
         environment:
             WWW_USER_ID: 1000
             WWW_GROUP_ID: 1000
             DOLI_DB_HOST: mariadb
             DOLI_DB_NAME: dolidb
-            DOLI_DB_USER_FILE: /run/secrets/mysql-user
-            DOLI_DB_PASSWORD_FILE: /run/secrets/mysql-password
+            #DOLI_DB_USER_FILE: /run/secrets/mysql-user
+            #DOLI_DB_PASSWORD_FILE: /run/secrets/mysql-password
             DOLI_ADMIN_LOGIN: admintest
             DOLI_ADMIN_PASSWORD: admintest
             DOLI_URL_ROOT: http://0.0.0.0:81
@@ -69,9 +71,9 @@ services:
             #context: ./docker-compose-links/${DOLI_VERSION}${PHP_VERSION}
         #image: dolibarr/dolibarr:${DOLI_VERSION}${PHP_VERSION}
         image: tuxgasy/dolibarr:18.0.2
-        secrets:
-            - mysql-user
-            - mysql-password
+        #secrets:
+            #- mysql-user
+            #- mysql-password
         volumes:
             - ./.volumes/dolibarr/custom:/var/www/html/custom
             - ./.volumes/dolibarr/documents:/var/www/documents
@@ -82,8 +84,8 @@ services:
             WWW_GROUP_ID: 1000
             DOLI_DB_HOST: mariadb
             DOLI_DB_NAME: dolidb
-            DOLI_DB_USER_FILE: "/run/secrets/mysql-user"
-            DOLI_DB_PASSWORD_FILE: "/run/secrets/mysql-password"
+            #DOLI_DB_USER_FILE: "/run/secrets/mysql-user"
+            #DOLI_DB_PASSWORD_FILE: "/run/secrets/mysql-password"
             DOLI_ADMIN_LOGIN: "admintest"
             DOLI_ADMIN_PASSWORD: "admintest"
             DOLI_URL_ROOT: 'http://0.0.0.0:81'
@@ -91,7 +93,7 @@ services:
             DOLI_INIT_DEMO: 1
             DOLI_CRON_KEY: mycronsecurekey
         ports:
-            - "81:80"
+            - "80:80"
         networks:
             - internal-pod
             - external-pod
