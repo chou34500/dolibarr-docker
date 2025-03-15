@@ -65,9 +65,10 @@ services:
             - internal-pod
 
     web:
-        build:
-            context: ./docker-compose-links/${DOLI_VERSION}${PHP_VERSION}
-        image: dolibarr/dolibarr:${DOLI_VERSION}${PHP_VERSION}
+        #build:
+            #context: ./docker-compose-links/${DOLI_VERSION}${PHP_VERSION}
+        #image: dolibarr/dolibarr:${DOLI_VERSION}${PHP_VERSION}
+        image: tuxgasy/dolibarr:18.0.2
         secrets:
             - mysql-user
             - mysql-password
